@@ -1,48 +1,45 @@
-import Lottie, { type LottieRefCurrentProps } from "lottie-react";
-import React, { type RefObject, useCallback, useRef } from "react";
-import menu from "../icons/menu.json";
+"use client";
+
+import React from "react";
 import Drawer from "./drawer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 export default function Header() {
-  const menuRef: RefObject<LottieRefCurrentProps> =
-    useRef<LottieRefCurrentProps>(null);
-  const menuClicked = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.checked) {
-      menuRef.current?.setDirection(1);
-    } else {
-      menuRef.current?.setDirection(-1);
-    }
-    menuRef.current?.play();
-  }, []);
   return (
-    <header>
-      <nav
-        className="mx-auto flex max-w-7xl items-center justify-between p-6"
-        aria-label="Global"
-      >
-        <div className="flex lg:flex-1">
-          <a href="#" className="text-lg font-bold leading-6 text-gray-900">
+    <header className="">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6">
+        <div className="h-8 flex items-center">
+          <a
+            href="#"
+            className="text-lg font-bold leading-6 text-gray-900 dark:text-white transition-all ease-out duration-300"
+          >
             Richard CHIU
           </a>
         </div>
-        <div>
-          <input
-            type="checkbox"
-            id="drawer-toggle"
-            className="hidden peer"
-            onChange={menuClicked}
-          />
-          <label htmlFor="drawer-toggle">
-            <Lottie
-              animationData={menu}
-              loop={false}
-              autoplay={false}
-              lottieRef={menuRef}
-            ></Lottie>
-          </label>
-          <div className="fixed top-0 right-0 -z-10 h-full w-full transition-all duration-500 transform translate-x-full peer-checked:translate-x-0">
-            <Drawer />
-          </div>
+        <nav className="hidden md:flex space-x-5">
+          <a href="/edu" className="group">
+            <div>Education</div>
+            <div className="h-1 bg-black w-0 group-hover:w-full transition-all ease-out duration-300" />
+          </a>
+          <a href="/job" className="group">
+            <div>Work Experience</div>
+            <div className="h-1 bg-black w-0 group-hover:w-full transition-all ease-out duration-300" />
+          </a>
+          <a href="/project" className="group">
+            <div>Personal Projects</div>
+            <div className="h-1 bg-black w-0 group-hover:w-full transition-all ease-out duration-300" />
+          </a>
+        </nav>
+        <div className="block md:hidden">
+          <button className="group">
+            <div className="dark:text-white">
+              <FontAwesomeIcon icon={faBars} />
+            </div>
+            <div className="fixed top-0 right-0 h-full shadow-lg dark:shadow-dark-lg w-2/3 transition-all duration-500 transform translate-x-full group-focus-within:translate-x-0">
+              <Drawer />
+            </div>
+          </button>
         </div>
       </nav>
     </header>

@@ -1,5 +1,6 @@
 import "./globals.css";
 import React from "react";
+import Header from "./components/header";
 
 export default function RootLayout({
   children,
@@ -7,8 +8,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html>
+      <body className=" dark:bg-[#121212] transition-all ease-out duration-300">
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
